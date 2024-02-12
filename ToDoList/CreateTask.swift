@@ -10,7 +10,7 @@ import SwiftUI
 struct CreateTask: View {
     @Binding var isPresented: Bool
     @Binding var taskName: String
-    @Binding var tasks: [Task]
+    @ObservedObject var taskViewModel: TaskViewModel
     var body: some View {
         VStack(spacing: 10){
             Text("Create New Task")
@@ -21,7 +21,7 @@ struct CreateTask: View {
             Button("Add"){
                 isPresented = false
                 let newTask = Task(name: taskName, isDone: false)
-                tasks.append(newTask)
+                taskViewModel.createTask(task: newTask)
                 
                 taskName = ""
             }
@@ -36,6 +36,7 @@ struct CreateTask: View {
             
             Button("Cancel"){
                 isPresented = false
+                taskName = ""
             }
             .padding(9)
             .background(Color.blue.cornerRadius(10))
@@ -54,5 +55,6 @@ struct CreateTask: View {
 }
 
 #Preview {
-    CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), tasks: .constant([Task(name: "Example Task", isDone: false)]))
+    let viewModel = TaskViewModel()
+    return CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), taskViewModel: viewModel)
 }

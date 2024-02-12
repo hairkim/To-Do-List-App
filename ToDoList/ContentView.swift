@@ -9,44 +9,67 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tasks: [Task] = []
+    @StateObject private var taskViewModel = TaskViewModel()
     @State private var showAlert = false
     @State private var newTaskText = ""
     
     var body: some View {
-        ZStack{
-            VStack(){
-                HStack(){
-                    Text("To Do List")
-                        .font(.title)
-                        .padding(20)
+        NavigationStack{
+            ZStack{
+                VStack(){ //for the main
+                    HStack(){ //is for the top of the page
+                        Text("To Do List")
+                            .font(.title)
+                            .padding(20)
+                        Spacer()
+                        Button(action: {
+                            showAlert = true
+                        }){
+                            Image(systemName: "plus")
+                        }.padding(30)
+                        
+                    }
                     Spacer()
-                    Button(action: {
-                        showAlert = true
-                    }){
-                        Image(systemName: "plus")
-                    }.padding(30)
-                    
+//                    ForEach(taskViewModel.tasks) { task in
+//                        TaskCheckMarks(viewModel: taskViewModel, taskID: task.id)
+//                    }
+                    List(taskViewModel.tasks) { task in
+                        TaskCheckMarks(viewModel: taskViewModel, taskID: task.id)
+                            .contentShape(Rectangle())
+                            .onTapGesture{}
+                            .buttonStyle(PlainButtonStyle())
+                    }
+                    Spacer()
+                    HStack(spacing: 150){
+                        Button(action: {
+                            //switch view
+                        }) {
+                            Image(systemName: "list.bullet.clipboard.fill")
+                        }
+                        Button(action: {
+                            //switch view
+                        }) {
+                            Image(systemName: "book.fill")
+                        }
+                    }
                 }
-                Spacer()
-                List($tasks, id: \.self) { task in
-                    TaskCheckMarks(task: task)
-                }
-            }
 
-            if showAlert{
-                CreateTask(isPresented: $showAlert, taskName: $newTaskText, tasks: $tasks)
-                    .transition(.scale)
+                if showAlert{
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showAlert = false
+                        }
+                    CreateTask(isPresented: $showAlert, taskName: $newTaskText, taskViewModel: taskViewModel)
+                        .transition(.scale)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(showAlert ? Color.black.opacity(0.3) : Color.clear)
+
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(showAlert ? Color.black.opacity(0.3) : Color.clear)
     }
     
-    //func addNewTask(){
-        //guard !newTaskText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {return }
-        //tasks.append(newTaskText)
-    //}
 }
 
 #Preview {

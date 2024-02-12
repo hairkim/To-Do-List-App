@@ -12,3 +12,22 @@ struct Task: Identifiable, Hashable{
     var name: String
     var isDone: Bool
 }
+
+class TaskViewModel: ObservableObject {
+    @Published var tasks: [Task] = []
+    
+    func delete(taskID: UUID) {
+        tasks.removeAll { $0.id == taskID }
+    }
+    
+    func checkDone(for taskID: UUID){
+        if let index = tasks.firstIndex(where: { $0.id == taskID }) {
+            tasks[index].isDone.toggle()
+        }
+    }
+    
+    func createTask(task: Task){
+        tasks.append(task)
+    }
+    
+}

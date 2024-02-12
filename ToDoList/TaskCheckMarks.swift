@@ -8,21 +8,44 @@
 import SwiftUI
 
 struct TaskCheckMarks: View {
-    @Binding var task: Task
+    @ObservedObject var viewModel: TaskViewModel
+    let taskID: UUID
+    
+    private var task: Task? {
+        viewModel.tasks.first(where: { $0.id == taskID })
+    }
     var body: some View {
         HStack {
             Button(action: {
-                task.isDone.toggle()
-            }) {
-                Image(systemName: task.isDone ? "checkmark.square.fill" : "square")
-                    .foregroundColor(task.isDone ? .blue: .gray)
-            }
-            Text(task.name)
+                if let taskID = task?.id {
+                    viewModel.checkDone(for: taskID)
+                }
+                }) {
+                    Image(systemName: task?.isDone ?? false ? "checkmark.square.fill" : "square")
+                        .foregroundColor(task?.isDone ?? false ? .blue : .gray)
+                }
+            .padding()
+            .contentShape(Rectangle())
+            Text(task?.name ?? "unknown task")
             Spacer()
+            Button(action: {
+                viewModel.delete(taskID: taskID)
+            }) {
+                Image(systemName: "trash")
+            }
+            .padding()
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            viewModel.checkDone(for: taskID)
         }
     }
 }
+                   
 
 #Preview {
-    TaskCheckMarks(task: .constant(Task(name: "New Task", isDone: false)))
+    let viewModel = TaskViewModel()
+    let task = Task(name: "Sample Task", isDone: false)
+    viewModel.tasks.append(task)
+    return TaskCheckMarks(viewModel: viewModel, taskID: task.id)
 }
