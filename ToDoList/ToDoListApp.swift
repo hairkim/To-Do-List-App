@@ -13,7 +13,7 @@ struct ToDoListApp: App {
     @StateObject private var taskManager = TaskManagement()
     var body: some Scene {
         WindowGroup{
-            CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), dueDate: .constant(Date()))
+            CreateTask(isPresented: .constant(true), taskName: .constant("New Task"))
                 .environment(\.managedObjectContext, taskManager.container.viewContext)
         }
     }

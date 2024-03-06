@@ -31,14 +31,15 @@ class TaskManagement: ObservableObject {
         }
     }
     
-    func addTask(name: String, dueDate: Date, context: NSManagedObjectContext) {
+    func addTask(name: String, context: NSManagedObjectContext) {
         let task = Task(context: context)
+        print("addTask used")
         task.name = name //String
         task.isDone = false //Bool
         task.id = UUID() //UUID
         task.date = Date() //Date
-        task.dueDate = dueDate //Date
         
+        print("addTask set")
         save(context: context)
     }
 }

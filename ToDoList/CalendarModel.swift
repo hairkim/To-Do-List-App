@@ -27,6 +27,7 @@ struct CalendarModel: UIViewRepresentable {
     
     class Coordinator: NSObject, FSCalendarDelegate {
         var parent: CalendarModel
+        var tasksForDates: [Date: [Task]] = [:]
         
         init(_ calendarModel: CalendarModel) {
             self.parent = calendarModel
@@ -36,8 +37,12 @@ struct CalendarModel: UIViewRepresentable {
         // Implement FSCalendarDelegate methods here
         
         func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+            let calendar = Calendar.current
+            let startDate = calendar.startOfDay(for: date)
+            let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+            
             let request: NSFetchRequest<Task> = Task.fetchRequest()
-            request.predicate = NSPredicate(format: "dueDate == %@", argumentArray: [date])
+            request.predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [startDate, endDate])
             
             do {
                 let tasks = try parent.viewContext.fetch(request)
@@ -49,6 +54,17 @@ struct CalendarModel: UIViewRepresentable {
             }
         }
         
+        func tasks(for date: Date) -> [Task] {
+            tasksForDates[date, default: []]
+        }
+        
+        func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+            let tasks = self.tasks(for: date)
+            // Now you can print the tasks or pass them to your view to be displayed
+            for task in tasks {
+                print("Task: \(String(describing: task.name)), Date: \(String(describing: task.date)), ID: \(String(describing: task.id))")
+            }
+        }
         
     }
 }

@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var selectedDate = Date()
+    @State private var selectedTasks: [Task] = []
+    @State private var selectedDate: Date?
     
     var body: some View {
-        CalendarModel()
-            .frame(height: 300)
+        VStack {
+            CalendarModel()
+                .frame(height: 300)
+            List(selectedTasks, id: \.self) { task in
+                Text(task.name ?? "Unnamed Task")
+            }
+        }
     }
     
 }

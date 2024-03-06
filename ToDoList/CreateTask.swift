@@ -13,14 +13,8 @@ struct CreateTask: View {
     
     @Binding var isPresented: Bool
     @Binding var taskName: String
-    @Binding var dueDate: Date
     
-    let dateRange: ClosedRange<Date> = {
-            let calendar = Calendar.current
-            let start = calendar.date(byAdding: .year, value: -1, to: Date())!
-            let end = calendar.date(byAdding: .year, value: 1, to: Date())!
-            return start...end
-        }()
+
     var body: some View {
         VStack(spacing: 10){
             Text("Create New Task")
@@ -28,11 +22,9 @@ struct CreateTask: View {
             TextField("Enter Task: ", text: $taskName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
-            DatePicker("Due Date", selection: $dueDate, in :dateRange, displayedComponents: .date)
-            
             Button("Add"){
                 //add task
-                taskManager.addTask(name: taskName, dueDate: dueDate, context: managedObjectContext)
+                taskManager.addTask(name: taskName, context: managedObjectContext)
             }
             .padding(9)
             .background(Color.blue.cornerRadius(10))
@@ -64,5 +56,5 @@ struct CreateTask: View {
 }
 
 #Preview {
-    return CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), dueDate: .constant(Date()))
+    return CreateTask(isPresented: .constant(true), taskName: .constant("New Task"))
 }
