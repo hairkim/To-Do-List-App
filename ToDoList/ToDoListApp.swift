@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct ToDoListApp: App {
+    @StateObject private var taskManager = TaskManagement()
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        WindowGroup{
+            CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), dueDate: .constant(Date()))
+                .environment(\.managedObjectContext, taskManager.container.viewContext)
         }
     }
 }

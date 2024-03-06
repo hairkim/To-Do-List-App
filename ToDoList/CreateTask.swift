@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct CreateTask: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @ObservedObject var taskManager = TaskManagement.shared
+    
     @Binding var isPresented: Bool
     @Binding var taskName: String
-    @ObservedObject var taskViewModel: TaskViewModel
+    @Binding var dueDate: Date
+    
+    let dateRange: ClosedRange<Date> = {
+            let calendar = Calendar.current
+            let start = calendar.date(byAdding: .year, value: -1, to: Date())!
+            let end = calendar.date(byAdding: .year, value: 1, to: Date())!
+            return start...end
+        }()
     var body: some View {
         VStack(spacing: 10){
             Text("Create New Task")
@@ -18,12 +28,11 @@ struct CreateTask: View {
             TextField("Enter Task: ", text: $taskName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
+            DatePicker("Due Date", selection: $dueDate, in :dateRange, displayedComponents: .date)
+            
             Button("Add"){
-                isPresented = false
-                let newTask = Task(name: taskName, isDone: false)
-                taskViewModel.createTask(task: newTask)
-                
-                taskName = ""
+                //add task
+                taskManager.addTask(name: taskName, dueDate: dueDate, context: managedObjectContext)
             }
             .padding(9)
             .background(Color.blue.cornerRadius(10))
@@ -55,6 +64,5 @@ struct CreateTask: View {
 }
 
 #Preview {
-    let viewModel = TaskViewModel()
-    return CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), taskViewModel: viewModel)
+    return CreateTask(isPresented: .constant(true), taskName: .constant("New Task"), dueDate: .constant(Date()))
 }

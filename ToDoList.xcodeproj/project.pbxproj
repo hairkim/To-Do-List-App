@@ -14,6 +14,12 @@
 		6F3309402B77653E003C7A69 /* CreateTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33093F2B77653E003C7A69 /* CreateTask.swift */; };
 		6F3309422B776D5C003C7A69 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3309412B776D5C003C7A69 /* Task.swift */; };
 		6F3309442B776E1D003C7A69 /* TaskCheckMarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3309432B776E1D003C7A69 /* TaskCheckMarks.swift */; };
+		6F8C85D22B7B4E9A0082BCE4 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C85D12B7B4E9A0082BCE4 /* CalendarView.swift */; };
+		6FB850332B7C86400010FDB5 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB850322B7C86400010FDB5 /* CalendarModel.swift */; };
+		6FDB31262B980F650036E49C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB31252B980F650036E49C /* FSCalendar */; };
+		6FDB31292B9813590036E49C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDB31282B9813590036E49C /* CoreData.framework */; };
+		6FDB312D2B98137C0036E49C /* TaskData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB312B2B98137C0036E49C /* TaskData.xcdatamodeld */; };
+		6FDB31302B98171B0036E49C /* TaskManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB312F2B98171B0036E49C /* TaskManagement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +31,11 @@
 		6F33093F2B77653E003C7A69 /* CreateTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTask.swift; sourceTree = "<group>"; };
 		6F3309412B776D5C003C7A69 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6F3309432B776E1D003C7A69 /* TaskCheckMarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckMarks.swift; sourceTree = "<group>"; };
+		6F8C85D12B7B4E9A0082BCE4 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		6FB850322B7C86400010FDB5 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		6FDB31282B9813590036E49C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6FDB312C2B98137C0036E49C /* TaskData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskData.xcdatamodel; sourceTree = "<group>"; };
+		6FDB312F2B98171B0036E49C /* TaskManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FDB31262B980F650036E49C /* FSCalendar in Frameworks */,
+				6FDB31292B9813590036E49C /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +56,7 @@
 			children = (
 				6F3309302B7757F7003C7A69 /* ToDoList */,
 				6F33092F2B7757F7003C7A69 /* Products */,
+				6FDB31272B9813590036E49C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,11 +71,15 @@
 		6F3309302B7757F7003C7A69 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				6FDB312A2B9813650036E49C /* DataModel */,
 				6F3309312B7757F7003C7A69 /* ToDoListApp.swift */,
-				6F3309332B7757F7003C7A69 /* ContentView.swift */,
-				6F3309412B776D5C003C7A69 /* Task.swift */,
 				6F3309432B776E1D003C7A69 /* TaskCheckMarks.swift */,
 				6F33093F2B77653E003C7A69 /* CreateTask.swift */,
+				6F8C85D12B7B4E9A0082BCE4 /* CalendarView.swift */,
+				6F3309332B7757F7003C7A69 /* ContentView.swift */,
+				6F3309412B776D5C003C7A69 /* Task.swift */,
+				6FB850322B7C86400010FDB5 /* CalendarModel.swift */,
+				6FDB312F2B98171B0036E49C /* TaskManagement.swift */,
 				6F3309352B7757FA003C7A69 /* Assets.xcassets */,
 				6F3309372B7757FA003C7A69 /* Preview Content */,
 			);
@@ -74,6 +92,22 @@
 				6F3309382B7757FA003C7A69 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6FDB31272B9813590036E49C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6FDB31282B9813590036E49C /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6FDB312A2B9813650036E49C /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				6FDB312B2B98137C0036E49C /* TaskData.xcdatamodeld */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +126,9 @@
 			dependencies = (
 			);
 			name = ToDoList;
+			packageProductDependencies = (
+				6FDB31252B980F650036E49C /* FSCalendar */,
+			);
 			productName = ToDoList;
 			productReference = 6F33092E2B7757F7003C7A69 /* ToDoList.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +157,9 @@
 				Base,
 			);
 			mainGroup = 6F3309252B7757F7003C7A69;
+			packageReferences = (
+				6FDB31242B980F650036E49C /* XCRemoteSwiftPackageReference "FSCalendar" */,
+			);
 			productRefGroup = 6F33092F2B7757F7003C7A69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -146,7 +186,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB850332B7C86400010FDB5 /* CalendarModel.swift in Sources */,
 				6F3309422B776D5C003C7A69 /* Task.swift in Sources */,
+				6FDB31302B98171B0036E49C /* TaskManagement.swift in Sources */,
+				6FDB312D2B98137C0036E49C /* TaskData.xcdatamodeld in Sources */,
+				6F8C85D22B7B4E9A0082BCE4 /* CalendarView.swift in Sources */,
 				6F3309342B7757F7003C7A69 /* ContentView.swift in Sources */,
 				6F3309402B77653E003C7A69 /* CreateTask.swift in Sources */,
 				6F3309322B7757F7003C7A69 /* ToDoListApp.swift in Sources */,
@@ -284,6 +328,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoList/Preview Content\"";
+				DEVELOPMENT_TEAM = CQP86J9UX9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -312,6 +357,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoList/Preview Content\"";
+				DEVELOPMENT_TEAM = CQP86J9UX9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -354,6 +400,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6FDB31242B980F650036E49C /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6FDB31252B980F650036E49C /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FDB31242B980F650036E49C /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		6FDB312B2B98137C0036E49C /* TaskData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6FDB312C2B98137C0036E49C /* TaskData.xcdatamodel */,
+			);
+			currentVersion = 6FDB312C2B98137C0036E49C /* TaskData.xcdatamodel */;
+			path = TaskData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6F3309262B7757F7003C7A69 /* Project object */;
 }
